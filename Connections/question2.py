@@ -29,7 +29,8 @@ class SimulationQ2(Simulation):
         for peer in self.network:
             connection_durations += peer.send_data_to_backend()
 
-        # Both peers in a connection know about the connection duration which means we count them both times
+        # Both peers in a connection know about the connection duration which means we count each connection two times.
+        # It does not impact the shape of the distribution but counts are double what they should be.
         # Given the precision on connection times in this exercise (14 digits), it is likely safe to assume two connections will never have the exact same connection duration
         # Thus the use of a set
         return compute_histogram_bins(set(connection_durations), BINS)
